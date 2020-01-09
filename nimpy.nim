@@ -776,7 +776,7 @@ proc cannotSerializeErr(k: string) =
 
 proc nimTabToPy[T: Table](t: T): PPyObject =
     result = PyObject_CallObject(cast[PPyObject](pyLib.PyDict_Type))
-    for k, v in t:
+    for k, v in t.pairs():
         let vv = nimValueToPy(v)
         when type(k) is string:
             let ret = pyLib.PyDict_SetItemString(result, k, vv)
